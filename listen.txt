@@ -1,0 +1,242 @@
+mport time
+a=lambda :time.time()
+
+def dd():
+	return time.time()
+
+print(a())
+print(dd())
+
+import time,datetime
+
+def pr_time(fun):
+	def dd(*args,**kwargs):
+		aa = lambda: time.time()
+		bb = aa()
+		fun(*args,**kwargs)
+		print('程序执行时间：{},消耗时间：{:.2f}'.format(datetime.datetime.now(),aa()-bb))
+	return dd
+
+def check_num(fun):
+	def aa(*args,**kwargs):
+		status=[]
+		for i in args:
+			if isinstance(i,int):
+				status.append(0)
+			else:
+				status.append(1)
+		if not sum(status):
+			print('数字符合条件')
+			fun(*args)
+		else:
+			print('格式错误')
+	return aa
+
+@pr_time
+@check_num
+def demo1(a,b):
+	time.sleep(1)
+	print('a+b=',a+b)
+
+@pr_time
+@check_num
+def test(m):
+	a=0
+	for i in range(m):
+		time.sleep(0.0001)
+		a+=i
+	print(a)
+
+pr_time(demo1)(1,9)
+demo1(1,9)
+demo1(1,8.3)
+test(1000)
+
+class Tdemo1:
+
+	def demo1(self):
+		print('demo1:Tdemo1')
+
+	def demo2(self):
+		print('demo2:Tdemo1')
+
+	def demo3(self):
+		print('demo3:Tdemo1')
+
+class Tdemo2(Tdemo1):
+
+	def demo1(self):
+		print('demo1_1:Tdemo2')
+
+	def demo4(self):
+		print('demo4:Tdemo2')
+
+class Tdemo3(Tdemo1):
+
+	def demo1(self):
+		super().demo1()
+
+	def demo5(self):
+		print('demo5:Tdemo3')
+
+class Tdemo4(Tdemo2,Tdemo3):
+
+	def demo6(self):
+		print('demo6:Tdemo4')
+
+if __name__ == '__main__':
+	aa=Tdemo1()
+	bb=Tdemo2()
+	cc=Tdemo3()
+	dd=Tdemo4()
+
+	aa.demo1()
+	aa.demo2()
+	aa.demo3()
+
+	bb.demo1()
+	bb.demo2()
+	bb.demo3()
+	bb.demo4()
+
+	cc.demo1()
+	cc.demo5()
+
+	dd.demo5()
+	dd.demo4()
+
+def demo1(*args,**kwargs):
+	print(sum(args),type(args),args)
+	print(kwargs)
+	print(kwargs.get('a',0))
+	print()
+	# for i,j in kwargs.items():
+	# 	print(i,j)
+demo1(1,2,3,4)
+demo1(a='aaa',b='bbb',c=[1,2,3])
+demo1(1,2,3,a='aa',b='bb')
+
+n=eval(input('请输入任一自然数：'))
+a=0
+def dem(n):
+	global a
+	a+=n
+	if n>0:
+		m=n-1
+		dem(m)
+dem(n)
+print(a)
+
+aa=[i for i in range(n+1)]
+print(sum(aa))
+
+s=0
+for i in range(n+1):
+	s+=i
+print(s)
+
+b=0
+while n>0:
+	b+=n
+	n-=1
+print(b)
+
+from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor
+import time,requests
+
+class Mee():
+	def demo(self):
+		print(11111)
+		time.sleep(1)
+
+req=requests.Session()
+def sign_phone(host,phone):
+	time.sleep(5)
+	url=f'{host}/channel/im/app_user_register/'
+	body = {'phone': [str(phone)], 'code': ['111111'], 'password': ['111111'], 'confirmPassword': ['111111'],
+			'password1': ['111111'], 'agreeToDeal': ['true']}
+	res=req.post(url,data=body)
+	print(res.status_code,res.json())
+
+if __name__ == '__main__':
+	aa=Mee()
+	num=6
+	host='http://192.168.188.14:10157'
+	phones=[13600000007+i for i in range(num)]
+	print(phones)
+
+	for phone in phones:
+		sign_phone(host,phone)
+
+	threadPool = ThreadPoolExecutor(max_workers=5, thread_name_prefix="test_")
+	for phone in phones:
+		future = threadPool.submit(sign_phone,host,phone)
+	threadPool.shutdown(wait=True)
+
+	pool=Pool()
+	for phone in phones:
+		pool.apply_async(func=sign_phone,args=(host,phone))
+	pool.close()
+	pool.join()
+
+
+公司认证
+{'工程方': {'company_name': '北京出行汽车服务有限公司', 'login_name': '13412150926'}, '渠道商': {'company_name': '南京中昊汽车服务有限公司', 'login_name': '13512150926'}, '生产商': {'company_name': '南京坤欧汽车服务有限公司', 'login_name': '13612150926'}}
+
+chrome-extension://ibllepbpahcoppkjjllbabhnigcbffpi/https://nos.netease.com/edu-lesson-pdfsrc/4C2E6AB13C2DE76CF1C8B4E68F081479-1537496470787?download=31.pdf&Signature=AQkhAQV5gaZuRjoZYLJucke5WIQlYk28HqiKIk%2B1SZI%3D&Expires=1607476304&NOSAccessKeyId=7db2f370ff9a412987155d36d55a6ead
+
+chrome-extension://ibllepbpahcoppkjjllbabhnigcbffpi/https://nos.netease.com/edu-lesson-pdfsrc/27FC30D484F19E5036A9D9AB47BFC90B-1537496487030?download=32.pdf&Signature=YXWyO3SnmXX4h1ZT1ECDp2AHxcsCUonKKNEwQ5onLjw%3D&Expires=1607476349&NOSAccessKeyId=7db2f370ff9a412987155d36d55a6ead
+
+订单状态
+
+战采
+{'product_id_1': 1304374, 'product_id_2': 1304375}  # [10, 10, 10,10, 10, 50]  对应订单：JN6S19G34870、3ES620JZ7D54、LS24GHYK8JV5
+{'product_id_1': 1304378, 'product_id_2': 1304379}  # [100, 0, 0, 0, 0, 0]  对应订单：YK1W2V38H0RB、3ES620JZ7D54
+{'product_id_1': 1304382, 'product_id_2': 1304383}  # [0, 100, 0, 0, 0, 0]  对应订单：W3HJ08ANKME7、Q71CFWSIB523
+{'product_id_1': 1304386, 'product_id_2': 1304387}  # [0,0,100, 0, 0, 0]  对应订单：HRNZK38J07E4、BG9H2SW175Z8
+{'product_id_1': 1304398, 'product_id_2': 1304399}  # [0,0,0, 0, 100, 0]  对应订单：D24IMB0KZ38C、1X97AZ04J2C6
+
+特殊战采：
+对应订单：RSY9KA426GV5、184J3N596A2D
+
+渠道：
+{'product_id_1': 1304407, 'product_id_2': 1304406}  # [10, 10, 10,10, 10, 50]  对应订单：2T3795LB4O06、56Y87VJXPAET
+
+总订单：
+{'product_id_1': 1304410}  # [100,0,0, 0, 0, 0]  对应订单：4G68RW25BMP0
+
+
+1、制定测试计划
+在展开自动化测试之前，最好做个测试计划，明确测试对象、测试目的、测试的项目内容、测试的方法、测试的进度要求，并确保测试所需的人力、硬件、数据等资源都准备充分。制定好测试计划后，下发给用例设计者
+
+2、分析测试需求
+用例设计者根据测试计划和需求说明书，分析测试需求，设计测试需求树，以便用例设计时能够覆盖所有的需求点。一般来讲，基于Web功能测试需要覆盖一下几个方面
+
+页面链接测试，确保各个链接正常；
+
+2）页面控件测试，确保各个控件可靠；
+
+3）页面功能测试，确保各项操作正常；
+
+4）数据处理测试，确保数据显示准确、处理精确可靠；
+
+5）模块业务逻辑测试，确保各个业务流程畅通。
+
+3、设计测试用例
+
+1、通过分析测试需求，设计出能够覆盖所有需求点的测试用例，形成专门的自动化测试用例文档。
+2、搭建测试环境，包括：被测系统的部署、测试硬件的调用、测试工具的安装和设置、网络环境的布置等。
+3、编写测试脚本，先通过录制的方式获取测试所需要的页面控件，然后再用结构化语句控制脚本的执行，插入检查点和异常判定反馈语句，将公共普遍的功能独立成共享脚本，必要时对数据进行参数化。不断调试，直到运行正常为止。脚本的编写和命名要符合管理规范，以便统一管理和维护。
+4、分析测试结果、记录测试问题，及时分析自动化测试结果，对自动化测试结果进行分析，以便尽早地发现缺陷。
+5、跟踪测试BUG，测试记录的BUG要记录到缺陷管理工具中去，以便定期跟踪处理。开发人员修复后，需要对此问题执行回归测试，重新执行自动化脚本。
+
+自动化脚本的维护，如果系统发生变更时，对自动化测试脚本和相关文档包括《自动化测试用例》、《自动化脚本设计说明书》进行维护，以适应变更后的系统。
+
+
+1、性能环境搭建，包括：被测系统的部署、测试工具以及插件的安装调试，数据库的配置
+2、性能场景设计，通过和业务部门沟通以及以往用户操作习惯，确定用户操作习惯模式，以及不同的场景用户数量，操作次数，确定测试指标，以及性能监控等
+3、性能脚本编写、执行，确认测试场景后，在系统已有的操作描述上，进一步完善为具体的性能脚本；按照之前已经设计好的业务场景、环境和测试用例脚本，部署环境，执行测试并记录结果
+4、性能脚本维护，根据近期业务需求的变化以及后端逻辑业务的优化，定期维护更新性能脚本
+5、性能分析，根据我们之前记录得到的测试结果（图表、曲线等），分析系统性能与预定的性能指标进行对比，确定是否达到了我们需要的结果
+6、性能测试中发现的问题，在性能测试执行过程中，可能会发现某些功能上的不足或存在的缺陷，以及需要优化的地方，这也是执行多次测试的优点
