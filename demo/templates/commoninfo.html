@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+        .pr-1{
+            padding-right: 10px;
+        }
+        .pr-2{
+            padding-right: 10px;
+        }
+        .lable{
+            font-size: 12px;
+        }
+        .input{
+            width: 150px;
+            margin: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>{{msg}}</h1>
+<form name="frm" action="/automation/api_test/update/commoninfo/" method="post">
+    <span>
+        环境信息：
+    </span>
+    <div class="flex">
+        <div class="pr-1">测试端口<input type="text" name="host_name" value="{{host_name}}"></div>
+        <div class="pr-1">测试环境<input type="text" name="host_port" value="{{host_port}}"></div>
+        <div class="pr-1">使用数据库<input type="text" name="host_mysql" value="{{host_mysql}}"></div>
+    </div>
+    <span>
+        商品信息：
+    </span>
+    <div class="flex">
+        <div class="pr-1">订单中商品ID_1<input type="text" name="sale_id_1" value="{{sale_id_1}}"></div>
+        <div class="pr-1">订单中商品ID_2<input type="text" name="sale_id_2" value="{{sale_id_2}}"></div>
+        <div class="pr-1">商品所属行业<input type="text" name="base_catelog" value="{{base_catelog}}"></div>
+        <div class="pr-1">商品所属行业ID<input type="text" name="base_catelog_id" value="{{base_catelog_id}}"></div>
+        <div class="pr-1">商品零售单价<input type="text" name="base_price" value="{{base_price}}"></div>
+    </div>
+    <div>
+    <span>
+        账户信息：
+    </span>
+        {% for value in  values%}
+        <div class="flex">
+            <div class="pr-2">用户<input type="text" name="user_name" value="{{value.user_name}}"></div>
+            <div class="pr-2">密码<input type="text" name="user_password" value="{{value.user_password}}"></div>
+            <div class="pr-2">用户所在公司类型<input type="text" name="user_type_name" value="{{value.user_type_name}}"></div>
+            <div class="pr-2">用户所在公司类型ID<input type="text" name="user_type_id" value="{{value.user_type_id}}"></div>
+            <div class="pr-2">用户所在公司<input type="text" name="user_company" value="{{value.user_company}}"></div>
+            <div class="pr-2">用户所在公司ID<input type="text" name="user_company_id" value="{{value.user_company_id}}"></div>
+        </div>
+        {% endfor %}
+    <span>
+        付款方式：
+    </span>
+    {% for payrate in  payrates%}
+        <div class="flex">
+            <div class="lable flex">付款比例使用范围<input class="input" type="text" name="payrate_type" value="{{payrate.payrate_type}}"></div>
+            <div class="lable flex">折扣率<input class="input" type="text" name="scales" value="{{payrate.scales}}"></div>
+            <div class="lable flex">预付款比例<input  class="input" type="text" name="prepayPercent" value="{{payrate.prepayPercent}}"></div>
+            <div class="lable flex">发货款比例<input  class="input" type="text" name="deliveryPercent" value="{{payrate.deliveryPercent}}"></div>
+            <div class="lable flex">到货款比例<input  class="input" type="text" name="arrivalPercent" value="{{payrate.arrivalPercent}}"></div>
+            <div class="lable flex">安装款比例<input  class="input" type="text" name="installPercent" value="{{payrate.installPercent}}"></div>
+            <div class="lable flex">结算款比例<input  class="input" type="text" name="finishPercent" value="{{payrate.finishPercent}}"></div>
+            <div class="lable flex">质保金比例<input  class="input" type="text" name="warrantyPercent" value="{{payrate.warrantyPercent}}"></div>
+        </div>
+        {% endfor %}
+    <div><input type="submit" value="更新基础数据" ></div>
+</form>
+<div><a href="/automation/api_test/show/{{ host_name }}">直接进入</a></div>
+<div><a href="/automation/">重新选择环境</a></div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流程选择</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+        #bingding {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>流程选择</h1>
+<form name="frm" action="/automation/api_test/epochn_process/{{host_name}}" method="post">
+    <div class="pr-1">测试端口：{{host_name}}</div>
+    <select name="value1" id="pk">
+        <option value="订单流程">订单流程</option>
+        <option value="智能招标">智能招标</option>
+        <option value="圈层价">圈层价</option>
+        <option value="公司认证">公司认证</option>
+        <option value="注册账户">注册账户</option>
+    </select>
+    <select name="value2" id="order">
+        {% for foo in values2.order %}
+        <option value="{{ foo }}">{{ foo }}</option>
+        {% endfor %}
+    </select>
+    <select name="value2" id="bingding">
+        {% for foo in values2.bingding %}
+        <option value="{{ foo }}">{{ foo }}</option>
+        {% endfor %}
+    </select>
+    <select name="value3" id="batch">
+        <option value="分批">分批</option>
+        <option value="不分批">不分批</option>
+    </select>
+    <div><input type="submit" value="开始执行" ></div>
+</form>
+<script>
+    var order = document.getElementById('order');
+    var bingding = document.getElementById('bingding');
+    var batch = document.getElementById('batch');
+    document.getElementById('pk').addEventListener('change',function(e){
+        if(e.target.value=='订单流程') {
+            bingding.style.display ='none';
+            order.style.display = 'inline-block';
+            order.disabled = false;
+            bingding.disabled = true;
+            batch.style.display = 'inline-block';
+        } else {
+            bingding.style.display ='inline-block';
+            order.style.display = 'none';
+            bingding.disabled = false;
+            order.disabled = true;
+            batch.style.display = 'none';
+            batch.disabled = true;
+        }
+    },false)
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑", "华文黑体", "黑体-简", "Heiti SC", "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+.pull-right{
+	float: right;
+}
+.header,.content{
+	width: 794px;
+	margin: auto;
+}
+.content{
+	font-size: 13px;
+	height: 1123px;
+	padding: 25px 0;
+	position: relative;
+}
+.content-header{
+	font-size: 16px;
+    padding: 10px 0;
+}
+.table{
+	border: 1px solid grey;
+}
+.table .table-header{
+	font-size: 19px;
+	text-align: center
+}
+.tr{
+	border-bottom: 1px solid grey;
+}
+.tr:last-child{
+	border-bottom: 0
+}
+.tr:after,.tr:before,
+.td:after,.td:before{
+	content: "";
+    display: table;
+}
+.tr:after, .td:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+.td{
+	padding: 15px;
+	float: left;
+	height: 100%;
+	word-wrap:break-word;
+	position: relative;
+	text-align: center;
+	border-right: 1px solid grey;
+}
+.td:last-child{
+	border-right: 0;
+}
+.td-row{
+	width: 100%;
+	text-align: left;
+}
+.td-1{
+	width: 14.28%;
+	padding: 15px 0;
+}
+.td-2{
+	width: 35.72%
+}
+.td-3{
+	width: 25%
+}
+.td-4{
+	width: 33.33%
+}
+.desc{
+	padding: 10px
+}
+.date{
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+}
+.date span{
+	margin-right: 30px;
+}
+.sign{
+	text-align: left;
+	margin-bottom: 27px;
+}
+.padding-2x{
+	padding: 29px 15px;
+}
